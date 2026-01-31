@@ -2,8 +2,8 @@ from datetime import timedelta, datetime, timezone
 from typing import Annotated
 from fastapi import APIRouter, Depends , HTTPException, status, Request
 from pydantic import BaseModel
-from ..models import Users
-from ..database import SessionLocal
+from models import Users
+from database import SessionLocal
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
@@ -43,7 +43,7 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
-templates = Jinja2Templates(directory="TodoApp/templates")
+templates = Jinja2Templates(directory="templates")
 
 ### Pages ###
 
