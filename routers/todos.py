@@ -2,14 +2,14 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Path, status, Request
 from pydantic import BaseModel, Field
-from ..models import Todos
-from ..database import  SessionLocal
+from models import Todos
+from database import  SessionLocal
 from sqlalchemy.orm import Session
-from .auth import get_current_user
+from routers.auth import get_current_user
 from starlette.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-templates = Jinja2Templates(directory="TodoApp/templates")
+templates = Jinja2Templates(directory="templates")
 
 router = APIRouter(
     prefix='/todos',
@@ -49,7 +49,7 @@ async def render_todo_page(request : Request, db: db_dependency):
 
         return templates.TemplateResponse("todo.html", {"request" : request, "todos" : todos, "user" : user})
     except:
-        return redirect_to_login
+        return redirect_to_login()
 
 @router.get('/add-todo-page')
 async def render_todo_page(request: Request):
