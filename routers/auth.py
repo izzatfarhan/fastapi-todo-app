@@ -9,14 +9,16 @@ from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
 from fastapi.templating import Jinja2Templates
+import os
+from dotenv import load_dotenv
 
 router = APIRouter(
     prefix= '/auth',
     tags=['auth']
 )
 
-SECRET_KEY = 'c87bdbef117f25cf117f16f103ef0c1d671d268e257a46b39bb6cc5b5c9c04fc'
-ALGORITHM = 'HS256'
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
