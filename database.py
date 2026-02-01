@@ -7,7 +7,7 @@ import os
 
 #create location if this db on fastapi app
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
-#postgresql://postgres:izzatfarhan123@localhost/TodoApplicationDatabase
+
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
